@@ -3,63 +3,89 @@ $(document).ready(function () {
     //variables to track count
     var wins = 0;
     var losses = 0;
-    var total = 0;
     var totalScore = 0;
-    var btn1value;
-    var currentScore = [];
+    var randomNumber = 0;
+    var gem1 = Math.floor(Math.random() * 12) + 1;
+    var gem2 = Math.floor(Math.random() * 12) + 1;
+    var gem3 = Math.floor(Math.random() * 12) + 1;
+    var gem4 = Math.floor(Math.random() * 12) + 1;
+
     function random() {
-        randomNumber = Math.floor(Math.random() * 12) + 1
+        randomNumber = Math.floor(Math.random() * 12) + 1;
     }
-    //Sets the target for the player
+    //Sets the target for the player between 19 & 120
     var targetScore = Math.floor(Math.random() * 101) + 19;
-    $("#scoreToMatch").append(targetScore);
+    $('#scoreToMatch').text(targetScore);
 
-    if (wins === 10) {
-        alert("You Won!!")
-        wins = 0;
-        losses = 0;
-        total = 0;
-        currentScore = 0;
+
+    function startOver() {
         var targetScore = Math.floor(Math.random() * 101) + 19;
-        $("#scoreToMatch").append(targetScore);
+        $('#scoreToMatch').text(targetScore);
+        totalScore = 0;
+        $('#totalScore').text(totalScore);
+        var gem1 = Math.floor(Math.random() * 12) + 1;
+        var gem2 = Math.floor(Math.random() * 12) + 1;
+        var gem3 = Math.floor(Math.random() * 12) + 1;
+        var gem4 = Math.floor(Math.random() * 12) + 1;
     }
-    else if (targetScore === total) {
-        wins++;
-    } else if (total > targetScore) {
-        losses++;
-    }
-
-    //Sets the value of each button and pushes to an array
+    //Sets the value of each button 
 
     $("#btn1").click(function () {
-        random();
-        currentScore.push(randomNumber);
-        total = (currentScore.reduce((a,b) => a + b));
-        $("#totalScore").append(total);
+        totalScore = totalScore + gem1;
+        $("#totalScore").text(totalScore);
+
+        if (totalScore == targetScore) {
+            startOver();
+            wins++;
+            $("#w-stat").text("Wins: " + wins);
+           
+        } else if (totalScore > targetScore) {
+            startOver();
+            losses++;
+            $("#l-stat").text("Losses: " + losses);
+        }
     });
 
-
-    var btn2value = Math.floor(Math.random() * 12) + 1;
     $("#btn2").click(function () {
-        var btn2value = Math.floor(Math.random() * 12) + 1;
-        total = currentScore.join() + btn2value;
-        $("#totalScore").append(total);
+        totalScore = totalScore + gem2;
+        $("#totalScore").text(totalScore);
+        if (totalScore == targetScore) {
+            startOver();
+            wins++;
+            $("#w-stat").text(wins);
+        } else if (totalScore > targetScore) {
+            startOver();
+            losses++;
+            $("#l-stat").text(losses);
+        }
     });
 
-    var btn3value = Math.floor(Math.random() * 12) + 1;
     $("#btn3").click(function () {
-        var btn3value = Math.floor(Math.random() * 12) + 1;
-        $("#totalScore").append(btn3value);
+        totalScore = totalScore + gem3;
+        $("#totalScore").text(totalScore);
+        if (totalScore == targetScore) {
+            startOver();
+            wins++;
+            $("#w-stat").text(wins);
+        } else if (totalScore > targetScore) {
+            startOver();
+            losses++;
+            $("#l-stat").text(losses);
+        }
     });
 
-    var btn4value = Math.floor(Math.random() * 12) + 1;
     $("#btn4").click(function () {
-        var btn4value = Math.floor(Math.random() * 12) + 1;
-        $("#totalScore").append(btn4value);
+        totalScore = totalScore + gem4;
+        $("#totalScore").text(totalScore);
+        if (totalScore == targetScore) {
+            startOver();
+            wins++;
+            $("#w-stat").text(wins);
+        } else if (totalScore > targetScore) {
+            startOver();
+            losses++;
+            $("#l-stat").text(losses);
+        }
     });
 
 });
-
-
-
-
